@@ -1,0 +1,22 @@
+<h1>Event Details</h1>
+
+<p><strong>Title:</strong> <%= @iterable_event.title %></p>
+<% if @iterable_event.users.any? %>
+  <h2>Event Users:</h2>
+  <ul>
+    <% @iterable_event.users.each do |user| %>
+      <li>
+        <%= user.email %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: @event, url: iterable_event_path(@iterable_event), method: :patch) do |form| %>
+  <% users = User.where.not(id: current_user.id).map { |user| [user.email, user.id] }.compact %>
+  <%= form.select :user_ids, users, {}, { multiple: true } %>
+  <%= form.submit "Add Users" %>
+<% end %>
+
+
+<%= link_to 'Back to Events', iterable_events_path, class: 'btn btn-secondary' %>

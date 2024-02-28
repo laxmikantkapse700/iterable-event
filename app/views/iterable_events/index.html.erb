@@ -1,0 +1,23 @@
+<% if user_signed_in? %> 
+  <div> Welcome <%= current_user.email %> </div> 
+  <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
+<% else %>
+  <%= button_to "Sign in", new_user_session_path %> 
+<% end %>
+
+<div class="btn-group">
+  <%= link_to 'Create Event A', new_iterable_event_path(type: 'A'), class: 'btn btn-primary' %>
+  <%= link_to 'Create Event B', new_iterable_event_path(type: 'B'), class: 'btn btn-primary' %>
+</div>
+
+
+
+<h2>All Events</h2>
+<ul>
+  <% @iterable_events.each do |event| %>
+    <li>
+      <%= link_to event.title, iterable_event_path(event['id']) %>
+    </li>
+  <% end %>
+</ul>
+

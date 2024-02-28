@@ -1,0 +1,22 @@
+<%= form_with(model: @iterable_event, url: iterable_events_path, method: :post) do |form| %>
+  <%= form.hidden_field :type, value: params[:type] %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Create Event' %>
+    <%= link_to 'Cancel', root_path, class: 'button' %>
+  </div>
+<% end %>
+
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
+<% if flash[:alert] %>
+  <div class="alert"><%= flash[:alert] %></div>
+<% end %>
+
